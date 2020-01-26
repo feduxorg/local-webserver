@@ -1,0 +1,22 @@
+name: Docker
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Login to docker hub
+      uses: actions-hub/docker/login@master
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    - uses: actions/checkout@v1
+
+    - name: Build the Docker image
+      run: docker build . --file docker/Dockerfile --tag ${GITHUB_REPOSITORY}:latest
+
+    - name: Push to docker hub :latest
+      uses: actions-hub/docker@master
+      with:
+        args: push ${GITHUB_REPOSITORY}:latest
+      if: startsWith(github.ref, 'refs/tags/')
