@@ -140,8 +140,6 @@ nothing and wait 7s or press ENTER 127.0.0.1 will be chosen.
 ./lw --silent --port 1234 --interface 127.0.0.1
 ~~~
 
-## Pre-Compiled Binaries
-
 ## Development
 
 This project was built with Google `Go`. See [this
