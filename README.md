@@ -42,7 +42,7 @@ version of "local-webserver" to the current working directory. You find all rele
 
 * Linux
 
-  ~~~
+  ~~~sh
   curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
   | grep -e "browser_download_url.*linux.*" \
   | cut -d : -f 2,3 \
@@ -52,7 +52,7 @@ version of "local-webserver" to the current working directory. You find all rele
 
 * Windows
 
-  ~~~
+  ~~~sh
   curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
   | grep -e "browser_download_url.*windows.*" \
   | cut -d : -f 2,3 \
@@ -62,7 +62,7 @@ version of "local-webserver" to the current working directory. You find all rele
 
 * MacOS
 
-  ~~~
+  ~~~sh
   curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
   | grep -e "browser_download_url.*darwin.*" \
   | cut -d : -f 2,3 \
