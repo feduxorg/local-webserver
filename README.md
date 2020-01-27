@@ -35,80 +35,112 @@ What makes `local-server` so nice and sweet?
   instances of `local_server` &ndash; can be overridden
 * You can choose which interface the server should listen on.
 
+## Download
+
+You can use the following commandline to download and extract the current
+version of "local-webserver" to the current working directory. You find all releases of "local-webserver [here: https://github.com/feduxorg/local-webserver/releases/latest](https://github.com/feduxorg/local-webserver/releases/latest).
+
+* Linux
+
+  ~~~
+  curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
+  | grep -e "browser_download_url.*linux.*" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | xargs -I {} sh -c 'curl -L {} | tar -xzf -'
+  ~~~
+
+* Windows
+
+  ~~~
+  curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
+  | grep -e "browser_download_url.*windows.*" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | xargs -I {} sh -c 'curl -L {} | tar -xzf -'
+  ~~~
+
+* MacOS
+
+  ~~~
+  curl -s https://api.github.com/repos/feduxorg/local-webserver/releases/latest \
+  | grep -e "browser_download_url.*darwin.*" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | xargs -I {} sh -c 'curl -L {} | tar -xzf -'
+  ~~~
+
 ## Usage
 
 The server will ask you what interface it should use on startup. If you do
 nothing and wait 7s or press ENTER 127.0.0.1 will be chosen.
 
-* Start server with random port (1023 < port < 65535) and `localhost` as interface (mind the `*` ) and be verbose:
+### Start server with random port (1023 < port < 65535) and `localhost` as interface (mind the `*` ) and be verbose:
 
-  ~~~
-  ./lw
-  # => Available Interfaces
-  # => [ 1]               enp0s25: 151.217.104.62
-  # => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
-  # => [ 3]*                   lo: 127.0.0.1
-  # => [ 4]                    lo: ::1
-  # => [ 5]              vboxnet0: 192.168.99.1
-  # => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
-  ~~~
+~~~
+./lw
+# => Available Interfaces
+# => [ 1]               enp0s25: 151.217.104.62
+# => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
+# => [ 3]*                   lo: 127.0.0.1
+# => [ 4]                    lo: ::1
+# => [ 5]              vboxnet0: 192.168.99.1
+# => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
+~~~
 
-* Start server with port and interface defined
+### Start server with port and interface defined
 
-  ~~~
-  ./lw --port 1234 --interface 127.0.0.2
-  # => 
-  # => Server listens on 127.0.0.2:1234
-  # => 
-  # => Requests:
-  # => 
-  ~~~
+~~~
+./lw --port 1234 --interface 127.0.0.2
+# => 
+# => Server listens on 127.0.0.2:1234
+# => 
+# => Requests:
+# => 
+~~~
 
-* Serve a different directory
+### Serve a different directory
 
-  ~~~
-  ./lw --directory /usr/share/doc
-  # or
-  ./lw --directory ~/
-  # => 
-  # => Available Interfaces
-  # => [ 1]               enp0s25: 151.217.104.62
-  # => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
-  # => [ 3]*                   lo: 127.0.0.1
-  # => [ 4]                    lo: ::1
-  # => [ 5]              vboxnet0: 192.168.99.1
-  # => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
-  # => 
-  # => Server listens on 127.0.0.1:17150
-  # => 
-  # => Requests:
-  ~~~
+~~~
+./lw --directory /usr/share/doc
+# or
+./lw --directory ~/
+# => 
+# => Available Interfaces
+# => [ 1]               enp0s25: 151.217.104.62
+# => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
+# => [ 3]*                   lo: 127.0.0.1
+# => [ 4]                    lo: ::1
+# => [ 5]              vboxnet0: 192.168.99.1
+# => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
+# => 
+# => Server listens on 127.0.0.1:17150
+# => 
+# => Requests:
+~~~
 
-* Do not output anything, but request which interface should be used
+### Do not output anything, but request which interface should be used
 
-  ~~~
-  ./lw --silent --port 1234 --interface 127.0.0.1
-  # => 
-  # => Available Interfaces
-  # => [ 1]               enp0s25: 151.217.104.62
-  # => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
-  # => [ 3]*                   lo: 127.0.0.1
-  # => [ 4]                    lo: ::1
-  # => [ 5]              vboxnet0: 192.168.99.1
-  # => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
-  ~~~
+~~~
+./lw --silent --port 1234 --interface 127.0.0.1
+# => 
+# => Available Interfaces
+# => [ 1]               enp0s25: 151.217.104.62
+# => [ 2]               enp0s25: 2001:67c:20a1:1104:7cab:7900:6e5:49bd
+# => [ 3]*                   lo: 127.0.0.1
+# => [ 4]                    lo: ::1
+# => [ 5]              vboxnet0: 192.168.99.1
+# => Enter Number [1-5] (Timeout: 7s, Default: 3, Press Enter for Default):
+~~~
 
 
-* Do not output anything, but request which interface should be used
+### Do not output anything, but request which interface should be used
 
-  ~~~
-  ./lw --silent --port 1234 --interface 127.0.0.1
-  ~~~
+~~~
+./lw --silent --port 1234 --interface 127.0.0.1
+~~~
 
 ## Pre-Compiled Binaries
-
-There are pre-compiled binaries available. Just head over to the [releases
-page](https://github.com/feduxorg/local-webserver/releases)
 
 ## Development
 
